@@ -1,16 +1,19 @@
 <?php
 $utenti = array("simone"=>"123", "simon"=>"456", "simo"=>"789");
-$login = $_GET["login"];
-$psw = $_GET["psw"];
-
-if ($login === '' || $psw === '') {
-    echo "Inserisci login e password.";
-    exit;
-}
-
-if (array_key_exists($login, $utenti) && $$utenti[$login] === $psw) {
-    echo "Utente Loggato";
-} else {
-    echo "Credenziali Errate";
-}
 ?>
+
+<html>
+    <head></head>
+    <body>
+        <h1>Controllo credenziali</h1>
+        <?php
+            $k = $_GET["login"];
+            $v = $utenti[$k];
+            if ($v === $_GET["psw"]) {
+                echo("<p style='color:green'>Utente Loggato</p>");
+            } else {
+                echo("<p style='color:red'>Credenziali Errate</p>");
+            }
+        ?>
+    </body>
+</html>
