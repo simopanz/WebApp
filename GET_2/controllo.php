@@ -1,5 +1,5 @@
 <?php
-$listaUtenti = array("simone"=>"123", "simon"=>"456", "simo"=>"789");
+$utenti = array("simone"=>"123", "simon"=>"456", "simo"=>"789");
 $login = $_GET["login"];
 $psw = $_GET["psw"];
 
@@ -8,7 +8,7 @@ if ($login === '' || $psw === '') {
     exit;
 }
 
-if (array_key_exists($login, $listaUtenti) && $listaUtenti[$login] === $psw) {
+if (array_key_exists($login, $utenti) && $$utenti[$login] === $psw) {
     echo "Utente Loggato";
 } else {
     echo "Credenziali Errate";
