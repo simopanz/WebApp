@@ -1,0 +1,72 @@
+[
+  {
+    "nome": "Luca",
+    "cognome": "Rossi",
+    "email": "luca.rossi@example.com",
+    "login": "lrossi92",
+    "password": "a8F!2kdP"
+  },
+  {
+    "nome": "Giulia",
+    "cognome": "Bianchi",
+    "email": "giulia.bianchi@example.com",
+    "login": "gbianchi77",
+    "password": "Pq7#Lm93"
+  },
+  {
+    "nome": "Marco",
+    "cognome": "Verdi",
+    "email": "marco.verdi@example.com",
+    "login": "mverdi88",
+    "password": "Zx12!nOp"
+  },
+  {
+    "nome": "Sara",
+    "cognome": "Fontana",
+    "email": "sara.fontana@example.com",
+    "login": "sfontana65",
+    "password": "9Qw$Rt6u"
+  },
+  {
+    "nome": "Alessandro",
+    "cognome": "Neri",
+    "email": "alessandro.neri@example.com",
+    "login": "aneri33",
+    "password": "Uv7&Fg8L"
+  },
+  {
+    "nome": "Elisa",
+    "cognome": "Moretti",
+    "email": "elisa.moretti@example.com",
+    "login": "emoretti21",
+    "password": "Km9@Ds4X"
+  },
+  {
+    "nome": "Davide",
+    "cognome": "Ferrari",
+    "email": "davide.ferrari@example.com",
+    "login": "dferrari54",
+    "password": "Bc3!Jp8Z"
+  },
+  {
+    "nome": "Martina",
+    "cognome": "Gallo",
+    "email": "martina.gallo@example.com",
+    "login": "mgallo40",
+    "password": "Yn7%Hs2M"
+  },
+  {
+    "nome": "Federico",
+    "cognome": "Marini",
+    "email": "federico.marini@example.com",
+    "login": "fmarini19",
+    "password": "Tp4*Vz5N"
+  },
+  {
+    "nome": "Chiara",
+    "cognome": "Conti",
+    "email": "chiara.conti@example.com",
+    "login": "cconti11",
+    "password": "Rw8#Ux7D"
+  }
+]
