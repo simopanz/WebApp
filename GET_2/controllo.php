@@ -22,7 +22,6 @@
                 foreach ($dati as $valore) {
                     foreach ($valore as $k=>$v) {
                         $utenti[$k] = $v;
-                        echo("$k: $v</br>");
                     }
                 }
             }
