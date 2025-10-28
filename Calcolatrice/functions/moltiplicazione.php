@@ -1,5 +1,4 @@
 <?php
-    function moltiplicazione($n1, $n2) {
-        return $n1 * $n2;
-    }
-?>
+function moltiplicazione($a, $b) {
+    return $a * $b;
+}

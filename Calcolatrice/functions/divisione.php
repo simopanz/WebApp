@@ -1,8 +1,7 @@
 <?php
-    function divisione($n1, $n2) {
-        if ($n2 != 0)
-            return $n1 / $n2;
-        else
-            return "Error";
+function divisione($a, $b) {
+    if ($b == 0.0) {
+        return null;
     }
-?>
+    return $a / $b;
+}
