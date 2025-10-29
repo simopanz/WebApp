@@ -1,4 +1,5 @@
 <?php
-function somma($a, $b) {
-    return $a + $b;
-}
+    function somma($a, $b) {
+        return $a + $b;
+    }
+?>
