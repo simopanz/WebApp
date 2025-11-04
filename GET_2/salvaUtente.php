@@ -16,7 +16,7 @@
         foreach($array as $utente){
             echo ("<p>");
             foreach($utente as $k=>$v){
-                echo ("$k: $v </br>");
+                echo ("$k: $v <br>");
             }
             echo ("</p>");    
         }
