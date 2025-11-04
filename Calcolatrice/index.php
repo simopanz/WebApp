@@ -67,7 +67,7 @@
 
             <div class="result">
                 <strong>Risultato:</strong>
-                <?php echo($result); ?>
+                <?php echo $result; ?>
             </div>
         </div>
     </body>
