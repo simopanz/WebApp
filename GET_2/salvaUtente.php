@@ -24,5 +24,5 @@
     $json = json_encode($array, JSON_PRETTY_PRINT);
     echo($json);
     file_put_contents($nomeFile, $json);
-}
+    }
 ?>
