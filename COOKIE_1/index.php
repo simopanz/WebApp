@@ -1,34 +1,26 @@
-<?php
-require_once 'delete_cookie.php';
-require_once 'set_cookie.php';
-
-$name = "utente";
-$value = "simopanz";
-?>
-
 <!doctype html>
 <html>
 <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Esercizio COOKIE</title>
 </head>
 <body>
     <?php
-    if (isset($_COOKIE[$name])) {
-        echo "<h1>Benvenuto nell'esercizio sui cookie</h1>";
-        
-    } else {
-        
-        if (isset($_POST["val"])) {
-            set($name, $_POST["val"]);
-        }
-    }
+    if (isset($_COOKIE['utente'])) {
+        $utente = $_COOKIE['utente'];
+        echo "<h1>Benvenuto $utente!</h1>"
     ?>
-    <a href="delete_">Cancella il cookie corrente</a>
-    <form action="index.php" method="post">
-        <label for="val">Inserisci il nome:</label>
-        <input type="text" name="val" id="val" required>
+    <a href="delete_cookie.php">Elimina cookie</a>
+    <?php
+    } else {
+    ?>
+    <form action="set_cookie.php" method="post">
+        <label for="nome">Inserisci nome:</label>
+        <input type="text" name="nome" id="nome" required>
         <br>
-        <input type="submit" name="btn" value="Ottieni il cookie">
+        <input type="submit" name="btn" value="Salva cookie">
     </form>
+    <?php } ?>
 </body>
 </html>

@@ -1,5 +1,6 @@
 <?php
-function delete($name, $value) {
-    setcookie($name, $value, time()-3600, "/");
-}
+setcookie('utente', '', time()-3600, "/");
+
+header("Location: index.php");
+exit;
 ?>
