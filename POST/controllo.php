@@ -1,6 +1,6 @@
 <?php
-$login = $_POST['login'];
-$psw = $_POST['psw'];
+$username = $_POST['username'];
+$password = $_POST['password'];
 $path = 'utenti.json';
 
 if (!file_exists($path)) die("Error: $path non esiste.");
@@ -12,7 +12,7 @@ if (!is_array($utenti)) die("Error: $path non valido.");
 
 $utente = null;
 foreach ($utenti as $u) {
-    if ($u['login'] === $login && $u['psw'] === $psw) {
+    if ($u['username'] === $username && $u['password'] === $password) {
         $utente = $u;
         break;
     }

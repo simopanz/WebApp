@@ -2,8 +2,8 @@
 $nome = $_POST['nome'];
 $cognome = $_POST['cognome'];
 $email = $_POST['email'];
-$login = $_POST['login'];
-$psw = $_POST['psw'];
+$username = $_POST['username'];
+$password = $_POST['password'];
 $path = 'utenti.json';
 $duplicato = false;
 
@@ -15,7 +15,7 @@ $utenti = json_decode($json, true);
 if (!is_array($utenti)) die("Error: $path non valido.");
 
 foreach ($utenti as $u) {
-    if ($u['email'] === $email || $u['login'] === $login) {
+    if ($u['email'] === $email || $u['username'] === $username) {
         $duplicato = true;
         $msg = "<h3 style='color:red'>Impossibile registrarsi</h3>";
         break;
@@ -27,8 +27,8 @@ if (!$duplicato) {
             'nome' => $nome,
             'cognome' => $cognome,
             'email' => $email,
-            'login' => $login,
-            'psw' => $psw
+            'username' => $username,
+            'password' => $password
     ];
     $json = json_encode($utenti, JSON_PRETTY_PRINT);
     file_put_contents($path, $json);

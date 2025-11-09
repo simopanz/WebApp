@@ -1,0 +1,16 @@
+[
+    {
+        "id": 1,
+        "name": "T-shirt",
+        "description": "Comoda t-shirt in cotone",
+        "price": 19.99,
+        "stock": 47
+    },
+    {
+        "id": 2,
+        "name": "Cappello",
+        "description": "Cappello estivo",
+        "price": 9.5,
+        "stock": 19
+    }
+]
