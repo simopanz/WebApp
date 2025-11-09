@@ -1,5 +1,11 @@
 <?php
+$nome = $_POST['nome'];
+$cognome = $_POST['cognome'];
+$email = $_POST['email'];
+$login = $_POST['login'];
+$psw = $_POST['psw'];
 $path = 'utenti.json';
+$duplicato = false;
 
 if (!file_exists($path)) die("Error: $path non esiste.");
 
@@ -8,21 +14,29 @@ $utenti = json_decode($json, true);
 
 if (!is_array($utenti)) die("Error: $path non valido.");
 
-//TO DO: verificare che non esista già un utente con la stessa login e/o psw
+foreach ($utenti as $u) {
+    if ($u['email'] === $email || $u['login'] === $login) {
+        $duplicato = true;
+        $msg = "<h3 style='color:red'>Impossibile registrarsi</h3>";
+        break;
+    }
+}
 
-$utenti[] = [
-    'nome' => $_POST['nome'],
-    'cognome' => $_POST['cognome'],
-    'email' => $_POST['email'],
-    'login' => $_POST['login'],
-    'psw' => $_POST['psw']
-];
-
-$json = json_encode($utenti, JSON_PRETTY_PRINT);
-file_put_contents($path, $json);
+if (!$duplicato) {
+    $utenti[] = [
+            'nome' => $nome,
+            'cognome' => $cognome,
+            'email' => $email,
+            'login' => $login,
+            'psw' => $psw
+    ];
+    $json = json_encode($utenti, JSON_PRETTY_PRINT);
+    file_put_contents($path, $json);
+    $msg = "<h3 style='color:green'>Utente registrato con successo</h3>";
+}
 ?>
 
-<!-- CONTROLLO SIGN UP -->
+<!-- SIGN UP -->
 <!DOCTYPE html>
 <html>
 <head>
@@ -31,7 +45,6 @@ file_put_contents($path, $json);
     <title>Esercizio POST</title>
 </head>
 <body>
-    
-    
+    <?php echo $msg ?>
 </body>
 </html>

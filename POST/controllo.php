@@ -17,25 +17,30 @@ foreach ($utenti as $u) {
         break;
     }
 }
-
-if ($utente) {
-    $messaggio = "<h3 style='color:green'>Utente Loggato</h3>";
-    //TO DO: finire stampa a video delle CREDENZIALI
-    $messaggio .= "<p>Nome: {$utente['nome']} </p>";
-} else {
-    $messaggio = "<h3 style='color:red'>Credenziali Errate</h3>";
-}
 ?>
 
-<!-- CONTROLLO SIGN IN -->
+<!-- SIGN IN -->
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <title>Esercizio POST</title>
+    <style>
+        table, th, td {border:1px solid black; border-collapse:collapse;}
+    </style>
 </head>
 <body>
-    <?php echo "$messaggio"; ?>
+    <?php if ($utente) { ?>
+        <h3 style='color:green'>Utente Loggato</h3>
+        <table style='width:50%'>
+            <h4>CREDENZIALI</h4>
+            <?php foreach ($utente as $k => $v)
+                echo "<tr><th>$k</th><td>$v</td></tr>";
+            ?>
+        </table>
+    <?php } else { ?>
+        <h3 style='color:red'>Credenziali Errate</h3>
+    <?php } ?>
 </body>
 </html>
