@@ -9,7 +9,7 @@ if (isset($_POST['nome'], $_POST['cognome'], $_POST['pers_font'], $_POST['pers_c
 }
 if (isset($_COOKIE['pers'])) {
     $lista = explode('|', $_COOKIE['pers']);
-    $font = if ($lista[0] === '');
+    $font = $lista[0];
     $colore = $lista[1];
     $bg = $lista[2];
 }
