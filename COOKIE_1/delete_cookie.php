@@ -1,5 +1,6 @@
 <?php
-function del() {
-    setcookie('utente', '', time()-3600, '/');
+function delete() {
+    global $keyCookie;
+    setcookie($keyCookie, '', time()-3600, '/');
 }
 ?>

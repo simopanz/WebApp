@@ -1,4 +1,19 @@
-
+<?php
+require_once 'set_cookie.php';
+require_once 'delete_cookie.php';
+$keyCookie = 'utente';
+if (isset($_GET['delete'])) {
+    delete();
+    header("Location: index.php");
+    exit;
+}    
+if (isset($_POST['nome'])) {
+    $nome = $_POST['nome'];
+    set();
+    header("Location: index.php");
+    exit;
+}
+?>
 
 <!DOCTYPE html>
 <html>
@@ -9,14 +24,12 @@
 </head>
 <body>
     <?php
-    if (isset($_COOKIE['utente'])) {
-        $utente = $_COOKIE['utente'];
-        echo "<h1>Benvenuto $utente!</h1>"
+    if (isset($_COOKIE[$keyCookie])) {
+        $utente = $_COOKIE[$keyCookie];
+        echo "<h1>Benvenuto $utente!</h1>";
     ?>
-    <a href="delete_cookie.php">Elimina cookie</a>
-    <?php
-    } else {
-    ?>
+    <a href="?delete=1">Elimina cookie</a>
+    <?php } else { ?>
     <form action="index.php" method="post">
         <div>
             <label for="nome">Inserisci nome:</label>

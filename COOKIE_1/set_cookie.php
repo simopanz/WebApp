@@ -1,4 +1,6 @@
 <?php
-$nome = $_POST['nome'];
-setcookie('utente', $nome, time()+3600, "/");
+function set() {
+    global $keyCookie, $nome;
+    setcookie($keyCookie, $nome, time()+3600, "/");
+}
 ?>
