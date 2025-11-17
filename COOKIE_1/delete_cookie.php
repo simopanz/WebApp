@@ -1,6 +1,5 @@
 <?php
-setcookie('utente', '', time()-3600, "/");
-
-header("Location: index.php");
-exit;
+function del() {
+    setcookie('utente', '', time()-3600, '/');
+}
 ?>

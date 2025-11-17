@@ -1,4 +1,6 @@
-<!doctype html>
+
+
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8">
@@ -15,11 +17,14 @@
     <?php
     } else {
     ?>
-    <form action="set_cookie.php" method="post">
-        <label for="nome">Inserisci nome:</label>
-        <input type="text" name="nome" id="nome" required>
-        <br>
-        <input type="submit" name="btn" value="Salva cookie">
+    <form action="index.php" method="post">
+        <div>
+            <label for="nome">Inserisci nome:</label>
+            <input type="text" name="nome" id="nome" required>
+        </div>
+        <div>
+            <input type="submit" name="btn" value="Salva cookie">
+        </div>
     </form>
     <?php } ?>
 </body>
