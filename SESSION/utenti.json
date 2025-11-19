@@ -1,0 +1,62 @@
+[
+  {
+    "nome": "Luca",
+    "cognome": "Rossi",
+    "username": "lrossi",
+    "password": "Qw7p!fA2"
+  },
+  {
+    "nome": "Maria",
+    "cognome": "Bianchi",
+    "username": "mbianchi",
+    "password": "T9f@2LmP"
+  },
+  {
+    "nome": "Giulia",
+    "cognome": "Verdi",
+    "username": "gverdi",
+    "password": "Xp4#kQz8"
+  },
+  {
+    "nome": "Marco",
+    "cognome": "Ferrari",
+    "username": "mferrari",
+    "password": "Hr2$9pWx"
+  },
+  {
+    "nome": "Sara",
+    "cognome": "Conti",
+    "username": "sconti",
+    "password": "Lk8%2VaR"
+  },
+  {
+    "nome": "Davide",
+    "cognome": "Ricci",
+    "username": "dricci",
+    "password": "Wq3&7BnS"
+  },
+  {
+    "nome": "Elena",
+    "cognome": "Fontana",
+    "username": "efontana",
+    "password": "Cs5@1HgD"
+  },
+  {
+    "nome": "Paolo",
+    "cognome": "Moro",
+    "username": "pmoro",
+    "password": "Zv6!3LpQ"
+  },
+  {
+    "nome": "Chiara",
+    "cognome": "Serra",
+    "username": "cserra",
+    "password": "Rt9^4KdM"
+  },
+  {
+    "nome": "Andrea",
+    "cognome": "Galli",
+    "username": "agalli",
+    "password": "Fp1*8NsQ"
+  }
+]

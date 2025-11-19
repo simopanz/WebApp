@@ -1,0 +1,12 @@
+[
+  { "id": 1,"nome": "Laptop" },
+  { "id": 2, "nome": "Smartphone" },
+  { "id": 3, "nome": "Cuffie Bluetooth" },
+  { "id": 4, "nome": "Monitor 27 pollici" },
+  { "id": 5, "nome": "Mouse Wireless" },
+  { "id": 6, "nome": "Tastiera Meccanica" },
+  { "id": 7, "nome": "Stampante" },
+  { "id": 8, "nome": "Sedia da Ufficio" },
+  { "id": 9, "nome": "Hard Disk Esterno" },
+  { "id": 10, "nome": "Zaino Porta PC" }
+]

@@ -1,9 +1,11 @@
 <?php
 $path = 'oggetti.json';
-if (!file_exists($path)) die "";
+if (!file_exists($path)) die("Error: $path non esiste.");
+$json = file_get_contents($path);
+$oggetti = json_decode($json, true);
+if (!is_array($oggetti)) die("Error: $path non valido.");
 ?>
 
-<!DOCTYPE html>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,6 +15,14 @@ if (!file_exists($path)) die "";
 </head>
 <body>
     <a href="index.php">Back</a>
-
+    <?php
+    foreach ($oggetti as $o) {
+        echo "<p>";
+        foreach ($o as $k => $v) {
+            echo "$k: $v<br>";
+        }
+        echo "</p>";
+    }
+    ?>
 </body>
 </html>
