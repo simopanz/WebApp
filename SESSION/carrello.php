@@ -1,8 +1,8 @@
 <?php
-
+ini_set('session.cookie_lifetime' '3600');
+session_start();
 ?>
 
-<!DOCTYPE html>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,6 +11,8 @@
     <title>Esercizio SESSION</title>
 </head>
 <body>
-    <a href="index.php">Back</a>
+    <a href="index.php">Home</a>
+    <a href="oggetti.php">Oggetti</a>
+    <h2>Carrello</h2>
 </body>
 </html>

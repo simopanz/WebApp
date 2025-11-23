@@ -7,10 +7,10 @@ if (!file_exists($path)) die("Error: $path non esiste.");
 $json = file_get_contents($path);
 $utenti = json_decode($json, true);
 if (!is_array($utenti)) die("Error: $path non valido.");
-$utente = null;
 foreach ($utenti as $u) {
     if ($u['username'] === $username && $u['password'] === $password) {
-        $utente = $u;
+        $stringU = $u['nome'].'|'.$u['cognome'].'|'.$u['username'].'|'.$u['password'];
+        setcookie('credenziali', $stringU, time()+1800, '/');
         break;
     }
 }
@@ -24,12 +24,13 @@ foreach ($utenti as $u) {
     <title>Esercizio SESSION</title>
 </head>
 <body>
-    <?php if ($utente) { ?>
+    <?php if (isset($_COOKIE['credenziali'])) { 
+        $utente = explode('|', $_COOKIE['credenziali']); ?>
         <div>
             <a href="oggetti.php">Oggetti</a>
             <a href="carrello.php">Carrello</a>
         </div>
-        <?php echo "<h1>Benvenuto {$utente['nome']} {$utente['cognome']}!</h1>";
+        <?php echo "<h1>Benvenuto $utente[0] $utente[1]!</h1>";
     } else { ?>
         <h1>Login</h1>
         <form action="index.php" method="post">

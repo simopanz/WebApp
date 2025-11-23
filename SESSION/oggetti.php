@@ -14,15 +14,13 @@ if (!is_array($oggetti)) die("Error: $path non valido.");
     <title>Esercizio SESSION</title>
 </head>
 <body>
-    <a href="index.php">Back</a>
-    <?php
-    foreach ($oggetti as $o) {
+    <a href="index.php">Home</a>
+    <a href="carrello.php">Carrello</a>
+    <h2>Oggetti</h2>
+    <?php foreach ($oggetti as $o) {
         echo "<p>";
-        foreach ($o as $k => $v) {
-            echo "$k: $v<br>";
-        }
+        foreach ($o as $k => $v) echo "$k: $v<br>";
         echo "</p>";
-    }
-    ?>
+    } ?>
 </body>
 </html>
