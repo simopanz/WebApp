@@ -1,17 +1,19 @@
 <?php
-$username = $_POST['username'] ?? null;
-$password = $_POST['password'] ?? null;
-
-$path = 'utenti.json';
-if (!file_exists($path)) die("Error: $path non esiste.");
-$json = file_get_contents($path);
-$utenti = json_decode($json, true);
-if (!is_array($utenti)) die("Error: $path non valido.");
-foreach ($utenti as $u) {
-    if ($u['username'] === $username && $u['password'] === $password) {
-        $stringU = $u['nome'].'|'.$u['cognome'].'|'.$u['username'].'|'.$u['password'];
-        setcookie('credenziali', $stringU, time()+1800, '/');
-        break;
+if (!(isset($_SESSION['utente']))) {
+    ini_set('session.cookie_lifetime', '3600');
+    $username = $_POST['username'] ?? null;
+    $password = $_POST['password'] ?? null;
+    $path = 'utenti.json';
+    if (!file_exists($path)) die("Error: $path non esiste.");
+    $json = file_get_contents($path);
+    $utenti = json_decode($json, true);
+    if (!is_array($utenti)) die("Error: $path non valido.");
+    foreach ($utenti as $u) {
+        if ($u['username'] === $username && $u['password'] === $password) {
+            session_start();
+            $_SESSION['utente'] = $u;
+            break;
+        }
     }
 }
 ?>
@@ -24,15 +26,13 @@ foreach ($utenti as $u) {
     <title>Esercizio SESSION</title>
 </head>
 <body>
-    <?php if (isset($_COOKIE['credenziali'])) { 
-        $utente = explode('|', $_COOKIE['credenziali']); ?>
-        <div>
-            <a href="oggetti.php">Oggetti</a>
-            <a href="carrello.php">Carrello</a>
-        </div>
-        <?php echo "<h1>Benvenuto $utente[0] $utente[1]!</h1>";
+    <a href="oggetti.php">Oggetti</a>
+    <?php if (isset($_SESSION['utente'])) { ?> <a href="carrello.php">Carrello</a> <?php } ?>
+    <h1>Crazy shop</h1>
+    <?php if (isset($_SESSION['utente'])) { 
+        echo "<h2>Account: ".$_SESSION['utente']['nome']." ".$_SESSION['utente']['cognome']."</h2>";
     } else { ?>
-        <h1>Login</h1>
+        <h2>Login</h2>
         <form action="index.php" method="post">
             <div>
                 <label for="username">Username</label>

@@ -1,6 +1,5 @@
 <?php
-ini_set('session.cookie_lifetime' '3600');
-session_start();
+
 ?>
 
 <!DOCTYPE html>
