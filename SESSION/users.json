@@ -1,0 +1,107 @@
+[
+  {
+    "id": 1,
+    "name": "Luca",
+    "surname": "Rossi",
+    "username": "lrossi",
+    "password": "Qw7p!fA2"
+  },
+  {
+    "id": 2,
+    "name": "Maria",
+    "surname": "Bianchi",
+    "username": "mbianchi",
+    "password": "T9f@2LmP"
+  },
+  {
+    "id": 3,
+    "name": "Giulia",
+    "surname": "Verdi",
+    "username": "gverdi",
+    "password": "Xp4#kQz8"
+  },
+  {
+    "id": 4,
+    "name": "Marco",
+    "surname": "Ferrari",
+    "username": "mferrari",
+    "password": "Hr2$9pWx"
+  },
+  {
+    "id": 5,
+    "name": "Sara",
+    "surname": "Conti",
+    "username": "sconti",
+    "password": "Lk8%2VaR"
+  },
+  {
+    "id": 6,
+    "name": "Davide",
+    "surname": "Ricci",
+    "username": "dricci",
+    "password": "Wq3&7BnS"
+  },
+  {
+    "id": 7,
+    "name": "Elena",
+    "surname": "Fontana",
+    "username": "efontana",
+    "password": "Cs5@1HgD"
+  },
+  {
+    "id": 8,
+    "name": "Paolo",
+    "surname": "Moro",
+    "username": "pmoro",
+    "password": "Zv6!3LpQ"
+  },
+  {
+    "id": 9,
+    "name": "Chiara",
+    "surname": "Serra",
+    "username": "cserra",
+    "password": "Rt9^4KdM"
+  },
+  {
+    "id": 10,
+    "name": "Andrea",
+    "surname": "Galli",
+    "username": "agalli",
+    "password": "Fp1*8NsQ"
+  },
+  {
+    "id": 11,
+    "name": "Simone",
+    "surname": "De Angelis",
+    "username": "sdeangelis",
+    "password": "Jm4%7QaT"
+  },
+  {
+    "id": 12,
+    "name": "Francesca",
+    "surname": "Neri",
+    "username": "fneri",
+    "password": "Pk9@2HsW"
+  },
+  {
+    "id": 13,
+    "name": "Matteo",
+    "surname": "Lombardi",
+    "username": "mlombardi",
+    "password": "Rn3#8VtQ"
+  },
+  {
+    "id": 14,
+    "name": "Alessia",
+    "surname": "Colombo",
+    "username": "acolombo",
+    "password": "Sd6!9BpE"
+  },
+  {
+    "id": 15,
+    "name": "Giorgio",
+    "surname": "Pellegrini",
+    "username": "gpellegrini",
+    "password": "Ht8*5LmR"
+  }
+]

@@ -1,14 +1,16 @@
 <?php
-$categoria = $_GET['filtro'] ?? '-';
-$path = 'oggetti.json';
+ini_set('session.cookie_lifetime', '3600');
+session_start();
+$category = $_GET['filter'] ?? '-';
+$path = 'products.json';
 if (!file_exists($path)) die("Error: $path non esiste.");
 $json = file_get_contents($path);
-$oggetti = json_decode($json, true);
-if (!is_array($oggetti)) die("Error: $path non valido.");
+$products = json_decode($json, true);
+if (!is_array($products)) die("Error: $path non valido.");
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="it">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,11 +18,11 @@ if (!is_array($oggetti)) die("Error: $path non valido.");
 </head>
 <body>
     <a href="index.php">Home</a>
-    <a href="carrello.php">Carrello</a>
-    <h2>Oggetti</h2>
-    <form action="oggetti.php" method="get">
-        <label for="filtro">Categoria</label>
-        <select name="filtro" id="filtro">
+    <?php if (isset($_SESSION['user'])) { ?> <a href="basket.php">Carrello</a> <?php } ?>
+    <h2>Prodotti</h2>
+    <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="get">
+        <label for="filter">Categoria</label>
+        <select name="filter" id="filter">
             <option value="-">-</option>
             <option value="Elettronica">Elettronica</option>
             <option value="Accessori PC">Accessori PC</option>
@@ -34,10 +36,10 @@ if (!is_array($oggetti)) die("Error: $path non valido.");
         </select>
         <button type="submit">Filtra</button>
     </form>
-    <?php foreach ($oggetti as $o) {
+    <?php foreach ($products as $p) {
         echo "<p>";
-        if ($categoria === $o['categoria']) foreach ($o as $k => $v) echo "$k: $v<br>";
-        elseif ($categoria === '-') foreach ($o as $k => $v) echo "$k: $v<br>";
+        if ($category === '-') foreach ($p as $k => $v) echo "$k: $v<br>";
+        elseif ($category === $p['category']) foreach ($p as $k => $v) echo "$k: $v<br>";
         echo "</p>";
     } ?>
 </body>
