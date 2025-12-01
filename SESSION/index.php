@@ -1,6 +1,7 @@
 <?php
 ini_set('session.cookie_lifetime', '3600');
 session_start();
+
 if (!(isset($_SESSION['user']))) {
     $username = $_POST['username'] ?? '';
     $password = $_POST['password'] ?? '';
@@ -24,7 +25,7 @@ if (!(isset($_SESSION['user']))) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Esercizio SESSION</title>
+    <title>Crazy Shop</title>
 </head>
 <body>
     <a href="products.php">Prodotti</a>
