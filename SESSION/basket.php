@@ -4,7 +4,7 @@ session_start();
 $productId = $_POST['product'] ?? 0;
 $amount = $_POST['amount'] ?? 0;
 $op = $_POST['op'] ?? '';
-$path = 'products.json';
+$path = 'data/products.json';
 
 if (!file_exists($path)) die("Error: $path non esiste.");
 $json = file_get_contents($path);

@@ -1,9 +1,9 @@
 <?php
 ini_set('session.cookie_lifetime', '3600');
 session_start();
-require 'functions/printProducts.php';
+require 'functions/printProduct.php';
 $category = $_GET['filter'] ?? '-';
-$path = 'products.json';
+$path = 'data/products.json';
 
 if (!file_exists($path)) die("Error: $path non esiste.");
 $json = file_get_contents($path);
@@ -40,8 +40,8 @@ if (!is_array($products)) die("Error: $path non valido.");
     </form>
     <?php foreach ($products as $p) {
         echo "<p>";
-        if ($category === '-') foreach ($p as $k => $v) echo "$k: $v<br>";
-        elseif ($category === $p['category']) foreach ($p as $k => $v) echo "$k: $v<br>";
+        if ($category === '-') printProduct($p);
+        elseif ($category === $p['category']) printProduct($p);
         echo "</p>";
     } ?>
 </body>
