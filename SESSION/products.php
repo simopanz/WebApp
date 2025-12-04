@@ -1,7 +1,7 @@
 <?php
 ini_set('session.cookie_lifetime', '3600');
 session_start();
-require 'functions/printProduct.php';
+require_once 'functions/printProduct.php';
 $category = $_GET['filter'] ?? '-';
 $path = 'data/products.json';
 

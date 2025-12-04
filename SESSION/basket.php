@@ -1,6 +1,10 @@
 <?php
 ini_set('session.cookie_lifetime', '3600');
 session_start();
+require_once 'functions/minIdProducts.php';
+require_once 'functions/maxIdProducts.php';
+$minId = minIdProducts();
+$maxId = maxIdProducts();
 $productId = $_POST['product'] ?? 0;
 $amount = $_POST['amount'] ?? 0;
 $op = $_POST['op'] ?? '';
@@ -14,9 +18,9 @@ if (!is_array($products)) die("Error: $path non valido.");
 if (!isset($_SESSION['user']['basket'])) $basket = [];
 else $basket = $_SESSION['user']['basket'];
 
-if (!($productId >= 1 && $productId <= 40)) $msg = "<p style='color:red'>Error: ID del prodotto non disponibile.</p>";
+if (!($productId >= 1 && $productId <= 40)) $msg = "<p style='color:red'>ID del prodotto non disponibile.</p>";
 else {
-    $product = $products['${productId}'];
+    $product = $products[$productId];
     switch ($op) {
         case 'add':
             if ($amount > 0 && $amount <= $product['amount']) {
