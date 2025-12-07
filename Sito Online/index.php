@@ -1,7 +1,9 @@
 <?php
 ini_set('session.cookie_lifetime', '3600');
 session_start();
+
 require_once 'functions/printUser.php';
+
 $msg = null;
 
 // login
@@ -42,6 +44,7 @@ if (isset($_POST['out'])) {
     <a href="products.php">Prodotti</a>
     <?php if (isset($_SESSION['user'])) { ?> <a href="basket.php">Carrello</a> <?php } ?>
     <h1>Crazy Shop</h1>
+
     <?php if (isset($_SESSION['user'])) { 
         echo "<h2>Account</h2>"; 
         echo "<p>".printUser($_SESSION['user'])."</p>"; ?>
@@ -51,7 +54,7 @@ if (isset($_POST['out'])) {
     <?php } else {
         if (isset($msg)) echo $msg; ?>
         <h2>Login</h2>
-        <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
+        <form action="" method="post">
             <div>
                 <label for="username">Username</label>
                 <input type="text" id="username" name="username" required>

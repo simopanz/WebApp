@@ -1,0 +1,84 @@
+<?php
+ini_set('session.cookie_lifetime', '3600');
+session_start();
+
+if (!isset($_SESSION['user'])) {
+    header('Location: index.php');
+    exit;
+}
+
+require_once 'functions/printProduct.php';
+require_once 'functions/priceBasket.php';
+require_once 'functions/findProductIndex.php';
+require_once 'functions/add.php';
+require_once 'functions/remove.php';
+require_once 'functions/delete.php';
+
+$productId = $_POST['product'] ?? 0;
+$amount = $_POST['amount'] ?? 0;
+$action = $_POST['action'] ?? '';
+
+$path = 'data/products.json';
+if (!file_exists($path)) die("Error: $path non esiste.");
+$json = file_get_contents($path);
+$products = json_decode($json, true);
+if (!is_array($products)) die("Error: $path non valido.");
+
+if (!isset($_SESSION['user']['basket'])) $basket = [];
+else $basket = $_SESSION['user']['basket'];
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $index = findProductIndex($basket, $productId);
+    switch ($action) {
+        case 'add':
+            $basket = add();
+            break;
+        case 'remove':
+            $basket = remove();
+            break;
+        case 'delete':
+            $basket = delete();
+            break;
+        default:
+            break;
+    }
+    $_SESSION['user']['basket'] = $basket;
+}
+?>
+
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crazy Shop</title>
+</head>
+<body>
+    <a href="index.php">Home</a>
+    <a href="products.php">Prodotti</a>
+    <h2>Carrello</h2>
+
+    <?php if (empty($basket)) echo "<p>Il carrello è vuoto.</p>";
+    else {
+        echo "<p>Prezzo del carrello: ".priceBasket($basket)." €";
+        foreach ($basket as $p) { ?>
+            <div style="margin-top:15px; margin-bottom:15px;">
+                <?php printProduct($p); ?>
+                <form action="" method="post" style="display:inline;">
+                    <input type="hidden" name="product" value="<?php echo $p['id']; ?>">
+                    <input type="number" name="amount" min="1" max="<?php echo $p['amount']; ?>" required>
+                    <button type="submit" name="action" value="add">Aggiungi</button>
+                </form>
+                <form action="" method="post" style="display:inline;">
+                    <input type="hidden" name="product" value="<?php echo $p['id']; ?>">
+                    <button type="submit" name="action" value="remove">-1</button>
+                </form>
+                <form action="" method="post" style="display:inline;">
+                    <input type="hidden" name="product" value="<?php echo $p['id']; ?>">
+                    <button type="submit" name="action" value="delete">Elimina</button>
+                </form>
+            </div>
+        <?php }
+    } ?>
+</body>
+</html>

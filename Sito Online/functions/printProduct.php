@@ -17,6 +17,8 @@ function printProduct($p) {
             case 'amount':
                 echo "Quantità: $v<br>";
                 break;
+            case 'price':
+                echo "Prezzo: $v €<br>";
             default:
                 break;
         }
