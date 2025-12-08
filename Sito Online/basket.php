@@ -39,11 +39,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         case 'delete':
             $basket = delete();
             break;
+        case 'order':
+            $msg = "<p>Il tuo ordine è andato a buon fine.</p>";
+            $basket = [];
+            break;
         default:
             break;
     }
     $_SESSION['user']['basket'] = $basket;
 }
+
+$totalBasket = priceBasket($basket);
 ?>
 
 <!DOCTYPE html>
@@ -58,10 +64,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <a href="products.php">Prodotti</a>
     <h2>Carrello</h2>
 
-    <?php if (empty($basket)) echo "<p>Il carrello è vuoto.</p>";
-    else {
-        echo "<p>Prezzo del carrello: ".priceBasket($basket)." €";
-        foreach ($basket as $p) { ?>
+    <?php if (empty($basket)) {
+        if (isset($msg)) echo $msg;
+        echo "<p>Il carrello è vuoto.</p>";
+    } else {
+        echo "<p style='display:inline;'>Prezzo del carrello: ".$totalBasket." €"; ?>
+        <form action="" method="post"  style="display:inline;">
+            <button type="submit" name="action" value="order">Ordina</button>
+        </form>
+        <?php foreach ($basket as $p) { ?>
             <div style="margin-top:15px; margin-bottom:15px;">
                 <?php printProduct($p); ?>
                 <form action="" method="post" style="display:inline;">
