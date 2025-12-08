@@ -4,8 +4,6 @@ session_start();
 
 require_once 'functions/printUser.php';
 
-$msg = null;
-
 // login
 if (!(isset($_SESSION['user'])) && $_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = $_POST['username'] ?? '';
@@ -17,6 +15,7 @@ if (!(isset($_SESSION['user'])) && $_SERVER['REQUEST_METHOD'] === 'POST') {
     if (!is_array($users)) die("Error: $path non valido.");
     foreach ($users as $u) {
         if ($u['username'] === $username && $u['password'] === $password) {
+            $msg = null;
             $_SESSION['user'] = $u;
             header('Location: '.$_SERVER['PHP_SELF']);
             exit;
@@ -39,6 +38,7 @@ if (isset($_POST['out'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Crazy Shop</title>
+    <link rel="icon" type="image/x-icon" href="images/favicon.ico">
 </head>
 <body>
     <a href="products.php">Prodotti</a>

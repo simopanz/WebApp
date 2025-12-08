@@ -3,22 +3,22 @@ function printProduct($p) {
     foreach ($p as $k => $v) {
         switch ($k) {
             case 'id':
-                echo "ID: $v<br>";
+                echo "ID: ".$v."<br>";
                 break;
             case 'name':
-                echo "Nome: $v<br>";
+                echo "Nome: ".$v."<br>";
                 break;
             case 'category':
-                echo "Categoria: $v<br>";
+                echo "Categoria: ".$v."<br>";
                 break;
             case 'description':
-                echo "Descrizione: $v<br>";
+                echo "Descrizione: ".$v."<br>";
                 break;
             case 'amount':
-                echo "Quantità: $v<br>";
+                echo "Quantità: ".$v."<br>";
                 break;
             case 'price':
-                echo "Prezzo: $v €<br>";
+                echo "Prezzo: ".$v."€<br>";
             default:
                 break;
         }

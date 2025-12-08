@@ -7,12 +7,13 @@ if (!isset($_SESSION['user'])) {
     exit;
 }
 
-require_once 'functions/printProduct.php';
 require_once 'functions/priceBasket.php';
+require_once 'functions/printProduct.php';
 require_once 'functions/findProductIndex.php';
 require_once 'functions/add.php';
 require_once 'functions/remove.php';
 require_once 'functions/delete.php';
+require_once 'functions/available.php';
 
 $productId = $_POST['product'] ?? 0;
 $amount = $_POST['amount'] ?? 0;
@@ -28,7 +29,8 @@ if (!isset($_SESSION['user']['basket'])) $basket = [];
 else $basket = $_SESSION['user']['basket'];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $index = findProductIndex($basket, $productId);
+    $indexBasket = findProductIndex($basket, $productId);
+    $indexProducts = findProductIndex($products, $productId);
     switch ($action) {
         case 'add':
             $basket = add();
@@ -48,8 +50,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
     $_SESSION['user']['basket'] = $basket;
 }
-
-$totalBasket = priceBasket($basket);
 ?>
 
 <!DOCTYPE html>
@@ -58,6 +58,7 @@ $totalBasket = priceBasket($basket);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Crazy Shop</title>
+    <link rel="icon" type="image/x-icon" href="images/favicon.ico">
 </head>
 <body>
     <a href="index.php">Home</a>
@@ -68,16 +69,18 @@ $totalBasket = priceBasket($basket);
         if (isset($msg)) echo $msg;
         echo "<p>Il carrello è vuoto.</p>";
     } else {
-        echo "<p style='display:inline;'>Prezzo del carrello: ".$totalBasket." €"; ?>
-        <form action="" method="post"  style="display:inline;">
+        echo "<p style='display:inline;'>Prezzo del carrello: <b>".priceBasket($basket)."€</b>"; ?>
+        <form action="" method="post" style="display:inline;">
             <button type="submit" name="action" value="order">Ordina</button>
         </form>
         <?php foreach ($basket as $p) { ?>
             <div style="margin-top:15px; margin-bottom:15px;">
-                <?php printProduct($p); ?>
+                <?php printProduct($p); 
+                $indexProducts = findProductIndex($products, $p['id']);
+                $indexBasket = findProductIndex($basket, $p['id']); ?>
                 <form action="" method="post" style="display:inline;">
                     <input type="hidden" name="product" value="<?php echo $p['id']; ?>">
-                    <input type="number" name="amount" min="1" max="<?php echo $p['amount']; ?>" required>
+                    <input type="number" name="amount" placeholder="0" min="0" max="<?php echo available(); ?>" required>
                     <button type="submit" name="action" value="add">Aggiungi</button>
                 </form>
                 <form action="" method="post" style="display:inline;">

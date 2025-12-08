@@ -2,12 +2,13 @@
 ini_set('session.cookie_lifetime', '3600');
 session_start();
 
-require_once 'functions/printProduct.php';
 require_once 'functions/categories.php';
+require_once 'functions/printProduct.php';
 require_once 'functions/findProductIndex.php';
 require_once 'functions/add.php';
 require_once 'functions/remove.php';
 require_once 'functions/delete.php';
+require_once 'functions/available.php';
 
 $category = $_GET['filter'] ?? '-';
 $productId = $_POST['product'] ?? 0;
@@ -25,7 +26,8 @@ if (!isset($_SESSION['user']['basket'])) $basket = [];
 else $basket = $_SESSION['user']['basket'];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $index = findProductIndex($basket, $productId);
+    $indexBasket = findProductIndex($basket, $productId);
+    $indexProducts = findProductIndex($products, $productId);
     switch ($action) {
         case 'add':
             $basket = add();
@@ -49,6 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Crazy Shop</title>
+    <link rel="icon" type="image/x-icon" href="images/favicon.ico">
 </head>
 <body>
     <a href="index.php">Home</a>
@@ -68,10 +71,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($category === '-' || $category === $p['category']) { ?>
             <div style="margin-top:15px; margin-bottom:15px;">
                 <?php printProduct($p);
+                $indexProducts = findProductIndex($products, $p['id']);
+                $indexBasket = findProductIndex($basket, $p['id']);
                 if (isset($_SESSION['user'])) { ?>
                     <form action="" method="post" style="display:inline;">
                         <input type="hidden" name="product" value="<?php echo $p['id']; ?>">
-                        <input type="number" name="amount" min="1" max="<?php echo $p['amount']; ?>" required>
+                        <input type="number" name="amount" placeholder="0" min="0" max="<?php echo available(); ?>">
                         <button type="submit" name="action" value="add">Aggiungi</button>
                     </form>
                     <form action="" method="post" style="display:inline;">
@@ -83,8 +88,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <button type="submit" name="action" value="delete">Elimina</button>
                     </form>
                     <div>
-                        <?php $index = findProductIndex($basket, $p['id']);
-                            if ($index !== -1) echo "Nel carrello: <b>".$basket[$index]['amount']."</b>"; ?>
+                        <?php if ($indexBasket !== -1) echo "Nel carrello: <b>".$basket[$indexBasket]['amount']."</b>"; ?>
                     </div>
                 <?php } ?>
             </div>
