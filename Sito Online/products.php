@@ -15,7 +15,7 @@ if (!isset($_SESSION['user']['basket'])) $basket = [];
 else $basket = $_SESSION['user']['basket'];
 
 $category = $_GET['filter'] ?? '-';
-$path = 'data/products.json';
+$path = __DIR__.'/data/products.json';
 if (!file_exists($path)) die("Error: $path non esiste.");
 $json = file_get_contents($path);
 $products = json_decode($json, true);
@@ -61,7 +61,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <label for="filter">Categoria</label>
         <select name="filter" id="filter">
             <option value="-">-</option>
-            <?php foreach ($categories as $c) echo "<option value=".$c.">".$c."</option>"; ?>
+            <?php foreach ($categories as $c) echo '<option value="'.$c.'">'.$c.'</option>'; ?>
         </select>
         <button type="submit">Filtra</button>
     </form>

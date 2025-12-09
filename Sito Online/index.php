@@ -9,7 +9,7 @@ require_once 'functions/navigationBar.php';
 if (!(isset($_SESSION['user'])) && $_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = $_POST['username'] ?? '';
     $password = $_POST['password'] ?? '';
-    $path = 'data/users.json';
+    $path = __DIR__.'/data/users.json';
     if (!file_exists($path)) die("Error: $path non esiste.");
     $json = file_get_contents($path);
     $users = json_decode($json, true);
@@ -47,7 +47,7 @@ if (isset($_POST['out'])) {
 
     <?php if (isset($_SESSION['user'])) { 
         echo "<h2>Account</h2>"; 
-        echo "<p>".printUser($_SESSION['user'])."</p>"; ?>
+        echo "<p>".printUser()."</p>"; ?>
         <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
             <button type="submit" name="out">Sign out</button>
         </form>

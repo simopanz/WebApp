@@ -1,6 +1,6 @@
 <?php
-function printUser($u) {
-    foreach ($u as $k => $v) {
+function printUser() {
+    foreach ($_SESSION['user'] as $k => $v) {
         switch ($k) {
             case 'id':
                 echo "ID: $v<br>";

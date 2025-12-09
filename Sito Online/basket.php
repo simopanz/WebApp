@@ -19,7 +19,7 @@ require_once 'functions/navigationBar.php';
 if (!isset($_SESSION['user']['basket'])) $basket = [];
 else $basket = $_SESSION['user']['basket'];
 
-$path = 'data/products.json';
+$path = __DIR__.'/data/products.json';
 if (!file_exists($path)) die("Error: $path non esiste.");
 $json = file_get_contents($path);
 $products = json_decode($json, true);
