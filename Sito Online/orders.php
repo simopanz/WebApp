@@ -1,0 +1,25 @@
+<?php
+ini_set('session.cookie_lifetime', '3600');
+session_start();
+
+if (!isset($_SESSION['user'])) {
+    header('Location: index.php');
+    exit;
+}
+
+require_once 'functions/navigationBar.php';
+?>
+
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crazy Shop</title>
+    <link rel="icon" type="image/x-icon" href="images/favicon.ico">
+</head>
+<body>
+    <?php echo navigationBar($_SERVER['PHP_SELF']); ?>
+    <h2>Ordini</h2>
+</body>
+</html>

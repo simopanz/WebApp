@@ -3,6 +3,7 @@ ini_set('session.cookie_lifetime', '3600');
 session_start();
 
 require_once 'functions/printUser.php';
+require_once 'functions/navigationBar.php';
 
 // login
 if (!(isset($_SESSION['user'])) && $_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -41,8 +42,7 @@ if (isset($_POST['out'])) {
     <link rel="icon" type="image/x-icon" href="images/favicon.ico">
 </head>
 <body>
-    <a href="products.php">Prodotti</a>
-    <?php if (isset($_SESSION['user'])) { ?> <a href="basket.php">Carrello</a> <?php } ?>
+    <?php echo navigationBar($_SERVER['PHP_SELF']); ?>
     <h1>Crazy Shop</h1>
 
     <?php if (isset($_SESSION['user'])) { 

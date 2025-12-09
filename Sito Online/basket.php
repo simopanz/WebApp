@@ -14,10 +14,10 @@ require_once 'functions/add.php';
 require_once 'functions/remove.php';
 require_once 'functions/delete.php';
 require_once 'functions/available.php';
+require_once 'functions/navigationBar.php';
 
-$productId = $_POST['product'] ?? 0;
-$amount = $_POST['amount'] ?? 0;
-$action = $_POST['action'] ?? '';
+if (!isset($_SESSION['user']['basket'])) $basket = [];
+else $basket = $_SESSION['user']['basket'];
 
 $path = 'data/products.json';
 if (!file_exists($path)) die("Error: $path non esiste.");
@@ -25,14 +25,14 @@ $json = file_get_contents($path);
 $products = json_decode($json, true);
 if (!is_array($products)) die("Error: $path non valido.");
 
-if (!isset($_SESSION['user']['basket'])) $basket = [];
-else $basket = $_SESSION['user']['basket'];
-
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $productId = $_POST['product'] ?? null;
     $indexBasket = findProductIndex($basket, $productId);
     $indexProducts = findProductIndex($products, $productId);
+    $action = $_POST['action'] ?? '';
     switch ($action) {
         case 'add':
+            $amount = $_POST['amount'] ?? ((available()) ? 1 : 0);
             $basket = add();
             break;
         case 'remove':
@@ -61,8 +61,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <link rel="icon" type="image/x-icon" href="images/favicon.ico">
 </head>
 <body>
-    <a href="index.php">Home</a>
-    <a href="products.php">Prodotti</a>
+    <?php echo navigationBar($_SERVER['PHP_SELF']); ?>
     <h2>Carrello</h2>
 
     <?php if (empty($basket)) {
@@ -77,10 +76,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <div style="margin-top:15px; margin-bottom:15px;">
                 <?php printProduct($p); 
                 $indexProducts = findProductIndex($products, $p['id']);
-                $indexBasket = findProductIndex($basket, $p['id']); ?>
+                $indexBasket = findProductIndex($basket, $p['id']);
+                $available = available();
+                $value = ($available) ? '1' : '0'; ?>
                 <form action="" method="post" style="display:inline;">
                     <input type="hidden" name="product" value="<?php echo $p['id']; ?>">
-                    <input type="number" name="amount" placeholder="0" min="0" max="<?php echo available(); ?>" required>
+                    <input type="number" name="amount" <?php echo "value=$value"; ?> min="0" max="<?php echo $available; ?>">
                     <button type="submit" name="action" value="add">Aggiungi</button>
                 </form>
                 <form action="" method="post" style="display:inline;">
