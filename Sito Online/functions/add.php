@@ -1,8 +1,7 @@
 <?php
-// REDO if()
 function add() {
-    global $amount, $products, $productId, $basket, $indexBasket, $indexProducts;
-    if ($amount > 0 && $amount <= $products[$indexProducts]['amount']) {
+    global $amount, $products, $productId, $basket, $indexBasket, $indexProducts, $available;
+    if ($amount > 0 && $amount <= $available) {
         $unitPrice = $products[$indexProducts]['price'];
         if ($indexBasket === -1) {
             $basket[] = [
