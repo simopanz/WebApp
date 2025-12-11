@@ -8,6 +8,8 @@ if (!isset($_SESSION['user'])) {
 }
 
 require_once 'functions/navigationBar.php';
+
+$orders = [];
 ?>
 
 <!DOCTYPE html>
@@ -21,5 +23,9 @@ require_once 'functions/navigationBar.php';
 <body>
     <?php echo navigationBar($_SERVER['PHP_SELF']); ?>
     <h2>Ordini</h2>
+
+    <?php if (empty($orders)) {
+        echo "<p>Nessun ordine effettuato.</p>";
+    } ?>
 </body>
 </html>
