@@ -29,10 +29,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $productId = $_POST['product'] ?? null;
     $indexBasket = findProductIndex($basket, $productId);
     $indexProducts = findProductIndex($products, $productId);
-    $available = available();
     $action = $_POST['action'] ?? '';
     switch ($action) {
         case 'add':
+            $available = available();
             $amount = $_POST['amount'] ?? (($available) ? 1 : 0);
             $basket = add();
             break;
