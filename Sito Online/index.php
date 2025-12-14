@@ -2,21 +2,18 @@
 ini_set('session.cookie_lifetime', '3600');
 session_start();
 
-require_once 'functions/printUser.php';
-require_once 'functions/navigationBar.php';
+require_once 'functions\printUser.php';
+require_once 'functions\navigationBar.php';
+require_once 'functions\jsonUtils.php';
 
 // login
 if (!(isset($_SESSION['user'])) && $_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = $_POST['username'] ?? '';
     $password = $_POST['password'] ?? '';
-    $path = __DIR__.'/data/users.json';
-    if (!file_exists($path)) die("Error: $path non esiste.");
-    $json = file_get_contents($path);
-    $users = json_decode($json, true);
-    if (!is_array($users)) die("Error: $path non valido.");
+    $path = __DIR__.'\data\users.json';
+    $users = read($path);
     foreach ($users as $u) {
         if ($u['username'] === $username && $u['password'] === $password) {
-            $msg = null;
             $_SESSION['user'] = $u;
             header('Location: '.$_SERVER['PHP_SELF']);
             exit;

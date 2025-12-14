@@ -1,27 +1,29 @@
 <?php
 function printProduct($p) {
+    $product = "";
     foreach ($p as $k => $v) {
         switch ($k) {
             case 'id':
-                echo "ID: ".$v."<br>";
+                $product .= "ID: ".$v."<br>";
                 break;
             case 'name':
-                echo "Nome: ".$v."<br>";
+                $product .= "Nome: ".$v."<br>";
                 break;
             case 'category':
-                echo "Categoria: ".$v."<br>";
+                $product .= "Categoria: ".$v."<br>";
                 break;
             case 'description':
-                echo "Descrizione: ".$v."<br>";
+                $product .= "Descrizione: ".$v."<br>";
                 break;
             case 'amount':
-                echo "Quantità: ".$v."<br>";
+                $product .= "Quantità: ".$v."<br>";
                 break;
             case 'price':
-                echo "Prezzo: ".$v."€<br>";
+                $product .= "Prezzo: ".$v."€<br>";
             default:
                 break;
         }
     }
+    return $product;
 }
 ?>

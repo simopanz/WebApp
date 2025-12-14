@@ -1,22 +1,24 @@
 <?php
 function printUser() {
+    $user = "";
     foreach ($_SESSION['user'] as $k => $v) {
         switch ($k) {
             case 'id':
-                echo "ID: $v<br>";
+                $user.= "ID: $v<br>";
                 break;
             case 'name':
-                echo "Nome: $v<br>";
+                $user.= "Nome: $v<br>";
                 break;
             case 'surname':
-                echo "Cognome: $v<br>";
+                $user.= "Cognome: $v<br>";
                 break;
             case 'username':
-                echo "Username: $v<br>";
+                $user.= "Username: $v<br>";
                 break;
             default:
                 break;
         }
     }
+    return $user;
 }
 ?>

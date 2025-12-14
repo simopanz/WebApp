@@ -2,24 +2,22 @@
 ini_set('session.cookie_lifetime', '3600');
 session_start();
 
-require_once 'functions/categories.php';
-require_once 'functions/printProduct.php';
-require_once 'functions/findProductIndex.php';
-require_once 'functions/add.php';
-require_once 'functions/remove.php';
-require_once 'functions/delete.php';
-require_once 'functions/available.php';
-require_once 'functions/navigationBar.php';
+require_once 'functions\categories.php';
+require_once 'functions\printProduct.php';
+require_once 'functions\findProductIndex.php';
+require_once 'functions\add.php';
+require_once 'functions\remove.php';
+require_once 'functions\delete.php';
+require_once 'functions\available.php';
+require_once 'functions\navigationBar.php';
+require_once 'functions\jsonUtils.php';
 
 if (!isset($_SESSION['user']['basket'])) $basket = [];
 else $basket = $_SESSION['user']['basket'];
 
 $category = $_GET['filter'] ?? '-';
-$path = __DIR__.'/data/products.json';
-if (!file_exists($path)) die("Error: $path non esiste.");
-$json = file_get_contents($path);
-$products = json_decode($json, true);
-if (!is_array($products)) die("Error: $path non valido.");
+$path = __DIR__.'\data\products.json';
+$products = read($path);
 $categories = categories($products);
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -70,7 +68,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <?php foreach ($products as $p) {
         if ($category === '-' || $category === $p['category']) { ?>
             <div style="margin-top:15px; margin-bottom:15px;">
-                <?php printProduct($p);
+                <?php echo printProduct($p);
                 $indexProducts = findProductIndex($products, $p['id']);
                 $indexBasket = findProductIndex($basket, $p['id']);
                 $available = available();

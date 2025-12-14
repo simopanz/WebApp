@@ -7,49 +7,49 @@ if (!isset($_SESSION['user'])) {
     exit;
 }
 
-require_once 'functions/priceBasket.php';
-require_once 'functions/printProduct.php';
-require_once 'functions/findProductIndex.php';
-require_once 'functions/add.php';
-require_once 'functions/remove.php';
-require_once 'functions/delete.php';
-require_once 'functions/available.php';
-require_once 'functions/navigationBar.php';
+require_once 'functions\priceBasket.php';
+require_once 'functions\printProduct.php';
+require_once 'functions\findProductIndex.php';
+require_once 'functions\add.php';
+require_once 'functions\remove.php';
+require_once 'functions\delete.php';
+require_once 'functions\available.php';
+require_once 'functions\navigationBar.php';
+require_once 'functions\jsonUtils.php';
 
-if (!isset($_SESSION['user']['basket'])) $basket = [];
-else $basket = $_SESSION['user']['basket'];
+if (isset($_SESSION['user']['basket'])) {
+    $basket = $_SESSION['user']['basket'];
 
-$path = __DIR__.'/data/products.json';
-if (!file_exists($path)) die("Error: $path non esiste.");
-$json = file_get_contents($path);
-$products = json_decode($json, true);
-if (!is_array($products)) die("Error: $path non valido.");
+    $path = __DIR__.'\data\products.json';
+    $products = read($path);
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $productId = $_POST['product'] ?? null;
-    $indexBasket = findProductIndex($basket, $productId);
-    $indexProducts = findProductIndex($products, $productId);
-    $action = $_POST['action'] ?? '';
-    switch ($action) {
-        case 'add':
-            $available = available();
-            $amount = $_POST['amount'] ?? (($available) ? 1 : 0);
-            $basket = add();
-            break;
-        case 'remove':
-            $basket = remove();
-            break;
-        case 'delete':
-            $basket = delete();
-            break;
-        case 'order':
-            $msg = "<p>Il tuo ordine è andato a buon fine.</p>";
-            $basket = [];
-            break;
-        default:
-            break;
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $productId = $_POST['product'] ?? null;
+        $indexBasket = findProductIndex($basket, $productId);
+        $indexProducts = findProductIndex($products, $productId);
+        $action = $_POST['action'] ?? '';
+        switch ($action) {
+            case 'add':
+                $available = available();
+                $amount = $_POST['amount'] ?? (($available) ? 1 : 0);
+                $basket = add();
+                break;
+            case 'remove':
+                $basket = remove();
+                break;
+            case 'delete':
+                $basket = delete();
+                break;
+            case 'order':
+                // TODO
+                $basket = [];
+                $msg = "<p>Il tuo ordine è andato a buon fine.</p>";
+                break;
+            default:
+                break;
+        }
+        $_SESSION['user']['basket'] = $basket;
     }
-    $_SESSION['user']['basket'] = $basket;
 }
 ?>
 
@@ -75,7 +75,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </form>
         <?php foreach ($basket as $p) { ?>
             <div style="margin-top:15px; margin-bottom:15px;">
-                <?php printProduct($p); 
+                <?php echo printProduct($p); 
                 $indexProducts = findProductIndex($products, $p['id']);
                 $indexBasket = findProductIndex($basket, $p['id']);
                 $available = available();
